@@ -1,0 +1,90 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\MentorGraphics\modeltech64_10.1b\examples
+T_opt
+VAWZK42Y`Xe>ZHE]FR4h@k0
+04 6 7 work tb_mux testmux 1
+=1-e454e87376e7-61f12ed1-b2-10d0
+o-quiet -auto_acc_if_foreign -work work
+n@_opt
+OL;O;10.1b;51
+Z1 dC:\MentorGraphics\modeltech64_10.1b\examples
+Emux
+Z2 w1643192764
+Z3 dC:\Users\ye20178\OneDrive - University of Bristol\Documents\Assignment1DDPGA\codeArchive\task3.3B
+Z4 8C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd
+Z5 FC:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd
+l0
+L1
+VdH36>O`bQKmJZM>`ba]8^0
+Z6 OL;C;10.1b;51
+32
+Z7 !s108 1643197363.472000
+Z8 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd|
+Z9 !s107 C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd|
+Z10 o-work work -2002 -explicit
+Z11 tExplicit 1
+!s100 S^dSkiz[H3NEmzb2UEVFh3
+!i10b 1
+Agates
+Z12 DEx4 work 3 mux 0 22 dH36>O`bQKmJZM>`ba]8^0
+l22
+L20
+Vf85ZJ8]1=8XQ^D8R4[ELY3
+!s100 =5OdSRYF1M9VRT^jZVW<@3
+R6
+32
+R7
+R8
+R9
+R10
+R11
+!i10b 1
+Adataflow
+R12
+l15
+L14
+V5L1lRfdz0HK=1`5^El@0I3
+!s100 _Y`02X=ZO;[:ZRDQB;NEX1
+R6
+32
+R7
+R8
+R9
+R10
+R11
+!i10b 1
+Etb_mux
+R2
+R3
+Z13 8C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd
+Z14 FC:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd
+l0
+L2
+VS=O?CG`E]?H`^Rmb0h?AK2
+!s100 Zz@P1Q>aRB>TXO:EdIeZ72
+R6
+32
+!i10b 1
+Z15 !s108 1643197363.541000
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd|
+Z17 !s107 C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd|
+R10
+R11
+Atestmux
+R12
+Z18 DEx4 work 6 tb_mux 0 22 S=O?CG`E]?H`^Rmb0h?AK2
+l21
+L4
+Z19 VcbR9Co>MKZmbkS;ic9fN@0
+Z20 !s100 =KT_V_31N2>n<U07M[DB_0
+R6
+32
+!i10b 1
+R15
+R16
+R17
+R10
+R11

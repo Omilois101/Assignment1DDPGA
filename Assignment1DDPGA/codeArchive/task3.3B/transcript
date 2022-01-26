@@ -1,0 +1,69 @@
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# ** Note: (vsim-3812) Design is being optimized...
+# 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave sim:/tb_mux/*
+run 1000ns
+# Causality operation skipped due to absense of debug database file
+run 50ns
+run 50ns
+quit sim
+# unknown switch: sim
+quit -sim
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave sim:/tb_mux/*
+run 50ns
+restart -f
+step
+step -over
+step
+run
+step
+# Nothing left to do.
+step -over
+# Nothing left to do.
+restart
+step
+step -over
+run
+# Break in Architecture gates at C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd line 23
+restart
+run
+# Break in Architecture testMux at C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd line 37
+add wave -position insertpoint  \
+sim:/tb_mux/testvector
+run
+# Break in Architecture gates at C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd line 23
+add wave sim:/tb_mux/C2/*
+restart
+# {C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd} 30 
+# ** Error: (vsim-3330) Line 30 in file "C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd" is not executable.
+#  
+run
+# Break in Architecture testMux at C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd line 37
+# Break in Architecture gates at C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd line 23
+# Break in Architecture dataflow at C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd line 16
+quit -sim
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave sim:/tb_mux/*
+run
