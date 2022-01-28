@@ -19,7 +19,7 @@ ARCHITECTURE testMux OF tb_mux IS
   FOR c1:mux USE ENTITY work.mux(dataflow);
   FOR c2:mux USE ENTITY work.mux(gates); 
   FOR c3:mux USE ENTITY work.mux(bool); 
-  FOR c4:mux USE ENTITY work.mux(sequential);  
+  FOR c4:mux USE ENTITY work.mux(sequential2);  
   
   BEGIN
     C1:mux PORT MAP(testvector(2), testvector(1),testvector(0),dfResult);

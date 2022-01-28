@@ -1,0 +1,55 @@
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# ** Note: (vsim-3812) Design is being optimized...
+# 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave sim:/tb_mux/*
+run -all
+# Causality operation skipped due to absense of debug database file
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave sim:/tb_mux/*
+run -all
+run -all
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave sim:/tb_mux/*
+add wave -position insertpoint  \
+sim:/tb_mux/testvector
+add wave sim:/tb_mux/*
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave -position insertpoint  \
+sim:/tb_mux/dfResult
+add dataflow  \
+sim:/tb_mux/dfResult
+add wave sim:/tb_mux/*
+run -all
+run
+quit -sim 
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+add wave -position insertpoint  \
+sim:/tb_mux/gateResult
+add wave -position insertpoint  \
+sim:/tb_mux/dfResult
+run

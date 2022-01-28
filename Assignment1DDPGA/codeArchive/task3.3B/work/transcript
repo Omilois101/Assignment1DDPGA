@@ -1,0 +1,226 @@
+# Compile of mux.vhd failed with 2 errors.
+# Compile of tb_mux.vhd failed with 3 errors.
+# 2 compiles, 2 failed with 5 errors. 
+# Compile of mux.vhd failed with 2 errors.
+# Compile of tb_mux.vhd failed with 3 errors.
+# 2 compiles, 2 failed with 5 errors. 
+# Compile of mux.vhd failed with 2 errors.
+# Compile of tb_mux.vhd failed with 3 errors.
+# 2 compiles, 2 failed with 5 errors. 
+# Compile of mux.vhd failed with 2 errors.
+# Compile of tb_mux.vhd failed with 3 errors.
+# 2 compiles, 2 failed with 5 errors. 
+# Compile of mux.vhd failed with 2 errors.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 1 failed with 2 errors. 
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential2)#1
+add wave -position insertpoint sim:/tb_mux/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: ye20178  Hostname: HP-P6-13  ProcessID: 12220
+# 
+#           Attempting to use alternate WLF file "./wlftgj1cd3".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlftgj1cd3
+# 
+add wave sim:/tb_mux/*
+quit -sim 
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential2)#1
+add wave -position insertpoint  \
+sim:/tb_mux/seqResult
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: ye20178  Hostname: HP-P6-13  ProcessID: 12220
+# 
+#           Attempting to use alternate WLF file "./wlfthfa17d".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlfthfa17d
+# 
+add wave -position insertpoint  \
+sim:/tb_mux/testvector
+add wave sim:/tb_mux/*
+run
+# Causality operation skipped due to absense of debug database file
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+run
+quit -aim 
+# unknown switch: -aim
+quit -sim
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential2)#1
+run
+add wave  \
+sim:/tb_mux/gateResult \
+sim:/tb_mux/dfResult \
+sim:/tb_mux/boolResult \
+sim:/tb_mux/seqResult
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: ye20178  Hostname: HP-P6-13  ProcessID: 12220
+# 
+#           Attempting to use alternate WLF file "./wlfthxtcs3".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlfthxtcs3
+# 
+run
+run
+quit -sim
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim -gui work.tb_mux
+# vsim -gui work.tb_mux 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_mux/C3/q has no driver.
+# 
+# This port will contribute value (0) to the signal network.
+# 
+add wave sim:/tb_mux/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: ye20178  Hostname: HP-P6-13  ProcessID: 12220
+# 
+#           Attempting to use alternate WLF file "./wlft93qd2s".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlft93qd2s
+# 
+run
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+quit -sim 
+vsim work.tb_mux
+# vsim work.tb_mux 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_mux/C3/q has no driver.
+# 
+# This port will contribute value (0) to the signal network.
+# 
+vsim work.tb_mux
+# vsim work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_mux/C3/q has no driver.
+# 
+# This port will contribute value (0) to the signal network.
+# 
+vsim work.tb_mux
+# vsim work.tb_mux 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_mux/C3/q has no driver.
+# 
+# This port will contribute value (0) to the signal network.
+# 
+add wave sim:/tb_mux/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: ye20178  Hostname: HP-P6-13  ProcessID: 12220
+# 
+#           Attempting to use alternate WLF file "./wlft3b8xgy".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlft3b8xgy
+# 
+run
+# ** Error: Assertion violation.
+#    Time: 10 ns  Iteration: 0  Instance: /tb_mux/C3
+# ** Error: Assertion violation.
+#    Time: 15 ns  Iteration: 0  Instance: /tb_mux/C3
+# ** Error: Assertion violation.
+#    Time: 20 ns  Iteration: 0  Instance: /tb_mux/C3
+# ** Error: Assertion violation.
+#    Time: 25 ns  Iteration: 0  Instance: /tb_mux/C3
+# ** Error: Assertion violation.
+#    Time: 35 ns  Iteration: 0  Instance: /tb_mux/C3
+# ** Error: Assertion violation.
+#    Time: 38 ns  Iteration: 0  Instance: /tb_mux/C3
+quit -sim 
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim work.tb_mux
+# vsim work.tb_mux 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# Loading std.standard
+# Loading work.tb_mux(testmux)#1
+# Loading work.mux(dataflow)#1
+# Loading work.mux(gates)#1
+# Loading work.mux(bool)#1
+# Loading work.mux(sequential)#1
+add wave sim:/tb_mux/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: ye20178  Hostname: HP-P6-13  ProcessID: 12220
+# 
+#           Attempting to use alternate WLF file "./wlftg7cny6".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlftg7cny6
+# 
+run

@@ -1,0 +1,140 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\MentorGraphics\modeltech64_10.1b\examples
+T_opt
+VzmJaJ3AWI1@AWhYaS?LB>3
+Z1 04 6 7 work tb_mux testmux 1
+=1-54bf64776dd7-61f41775-2e3-21c0
+Z2 o-quiet -auto_acc_if_foreign -work work
+Z3 n@_opt
+Z4 OL;O;10.1b;51
+T_opt1
+VE?jG:5JGCU5C?i25LDM<U2
+R1
+=1-002248412e2f-61f3374d-fc-2fbc
+o-quiet -auto_acc_if_foreign -work work +acc
+n@_opt1
+R4
+Z5 dC:\MentorGraphics\modeltech64_10.1b\examples
+Emux
+Z6 w1643386700
+Z7 dC:\Users\ye20178\OneDrive - University of Bristol\Documents\Assignment1DDPGA\codeArchive\task3.3B\work
+Z8 8C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd
+Z9 FC:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd
+l0
+L1
+Z10 VdH36>O`bQKmJZM>`ba]8^0
+Z11 !s100 S^dSkiz[H3NEmzb2UEVFh3
+Z12 OL;C;10.1b;51
+32
+Z13 !s108 1643386732.936000
+Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd|
+Z15 !s107 C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd|
+Z16 o-work work -2002 -explicit
+Z17 tExplicit 1
+!i10b 1
+Abool
+Z18 DEx4 work 3 mux 0 22 dH36>O`bQKmJZM>`ba]8^0
+l44
+L42
+Vo7HCA;:jkQb:EJ3n]_K;]0
+R12
+32
+R13
+R14
+R15
+R16
+R17
+!s100 1JfB]GLBc<S[jgdRlzEc^1
+!i10b 1
+Asequential
+R18
+l31
+L30
+V=Od[?Q772zh]LPgd2gNc>0
+R12
+32
+R13
+R14
+R15
+R16
+R17
+!s100 MIGl`Q@GJ`5z_G:YGicfH0
+!i10b 1
+Agates
+R18
+l23
+L19
+Z19 Vf85ZJ8]1=8XQ^D8R4[ELY3
+R12
+32
+R13
+R14
+R15
+R16
+R17
+!s100 I2o^lk37A_Y0f[@DG0;=S2
+!i10b 1
+Adataflow
+R18
+l14
+L10
+Z20 V5L1lRfdz0HK=1`5^El@0I3
+R12
+32
+R13
+R14
+R15
+R16
+R17
+!s100 JS9Qn0TRXaCY1[`eSGYeH3
+!i10b 1
+Asequential2
+R18
+l32
+L31
+VzeD>89;f;Y`na3k6OYSMS3
+R12
+32
+R14
+R15
+R16
+R17
+w1643385283
+!s108 1643385286.551000
+!s100 KOa6DS2;TS9^A`YD50a:53
+!i10b 1
+Etb_mux
+Z21 w1643385771
+R7
+Z22 8C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd
+Z23 FC:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd
+l0
+L2
+Z24 VS=O?CG`E]?H`^Rmb0h?AK2
+Z25 !s100 Zz@P1Q>aRB>TXO:EdIeZ72
+R12
+32
+Z26 !s108 1643386733.017000
+Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd|
+Z28 !s107 C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd|
+R16
+R17
+!i10b 1
+Atestmux
+R18
+Z29 DEx4 work 6 tb_mux 0 22 S=O?CG`E]?H`^Rmb0h?AK2
+l24
+L4
+V?;<OSd6OWgi@]U`Ra8?a?2
+R12
+32
+R26
+R27
+R28
+R16
+R17
+!s100 E@TDJbNhlCbH^z7ZoXT;B1
+!i10b 1

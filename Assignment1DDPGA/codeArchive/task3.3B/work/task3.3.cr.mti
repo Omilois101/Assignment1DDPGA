@@ -1,0 +1,20 @@
+{C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/mux.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Compiling entity mux
+-- Compiling architecture dataflow of mux
+-- Compiling architecture gates of mux
+-- Loading entity mux
+-- Compiling architecture sequential of mux
+-- Loading entity mux
+-- Compiling architecture bool of mux
+-- Loading entity mux
+
+} {} {}} {C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/ye20178/OneDrive - University of Bristol/Documents/Assignment1DDPGA/codeArchive/task3.3B/tb_mux.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Compiling entity tb_mux
+-- Compiling architecture testMux of tb_mux
+-- Loading entity mux
+
+} {} {}}
