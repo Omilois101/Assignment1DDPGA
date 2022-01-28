@@ -9,8 +9,8 @@ END mux;
 
 ARCHITECTURE dataflow OF mux IS
 -- This shows the functionality of the code without the use of gate implementation.
--- It can be useful and preferable because it reduces the length of the code therfore speeding up the running of the code.
--- It avoides errors and glitches produced using the gates in the other architecture.
+-- It can be useful and preferable because it reduces the length of the code therefore speeding up the running of the code.
+-- It avoides errors and glitches produced using the gates in the gate implementation.
 BEGIN
   q <= a WHEN address = '0' ELSE b;
 END dataflow;
@@ -18,7 +18,7 @@ END dataflow;
 
 ARCHITECTURE gates OF mux IS
 -- This is also quite useful but slow in its implentation.
--- It is useful when dealing with a data bit but not dealing with larger bits for both a and b.
+-- It has glitches at 25ns and 30 ns. It is not effective in implentation.
 SIGNAL int1,int2,int_address: BIT;
 BEGIN
   q <= int1 OR int2;
@@ -27,7 +27,9 @@ BEGIN
   int2 <= int_address AND a;
 END gates;
 
-ARCHITECTURE sequential OF mux IS
+ARCHITECTURE sequential OF mux IS 
+-- It contains a process with sequential list having signals a ,b and address in the circuit.
+-- it makes use of If statements to depict its functionality. 
 BEGIN
   select_proc : PROCESS (a,b,address)
  	  BEGIN
@@ -40,6 +42,9 @@ BEGIN
 END sequential;
 
 ARCHITECTURE bool OF mux IS
+-- Most preferable of all the implentations,
+--It is short and concise without having any glitches in the circuit compared to gates 
+-- A signal is needed to connect the internal signals to the external output signal q
 SIGNAL q_out: BIT;  
 BEGIN
   q_out <= ((a and (not address))or(b and address));
