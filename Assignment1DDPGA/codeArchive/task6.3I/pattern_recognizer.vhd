@@ -1,5 +1,5 @@
 --------------------------------------------
--- Implementation of a Pattern Detector
+--Implementation of a Pattern Detector
 --------------------------------------------
 
 LIBRARY ieee;
@@ -14,26 +14,31 @@ PORT(
 end;
 
 ARCHITECTURE arch_ pat_detector for pat_detector is 
-TYPE state_type IS (s0,s1,s2)
+TYPE state_type IS (s0,s1,s2,s3)
 signal curState,nextState : std_Ulogic 
 signal counter_sig : integer; 
-component(
-);
+signal en_counter,res_counter: bit;
+
 begin 
   
 comb_nextstate: process()
    BEGIN
     CASE curState IS
       WHEN so => 
+        if x
+        
       WHEN s1 =>
+        if 
       WHEN s2 =>
+     
+      When s3 
     end case;  
 end process;
 
 comb_out:process()
     begin 
       y <= '0';  
-    IF curState = 's2' THEN
+    IF curState = 's3' THEN
       y <= '1';
     END IF;
 end process;
@@ -47,12 +52,15 @@ end if;
 
 counter:process(counter_sig, clk)
 begin
-  if reset = '0' then 
+  if reset = '0' or res_counter = '1'then 
      counter_sig <= 0; 
  else if clk'event and clk = '1' then 
+     if en_counter = '1' then
       counter_sig <= counter + 1;
+     end if;
  end if;
 end process; 
 
 END process; 
 END arch_ pat_detector;
+
