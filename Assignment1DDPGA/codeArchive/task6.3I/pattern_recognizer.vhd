@@ -25,8 +25,9 @@ comb_nextstate: process()
    BEGIN
     CASE curState IS
       WHEN so => 
-        if x
-        
+        if x= '0' then 
+          nextState <+
+           
       WHEN s1 =>
         if 
       WHEN s2 =>
@@ -45,9 +46,9 @@ end process;
 
 SEQ_STATE: PROCESS (clk , curState)
   if reset = '0' then 
-    curState = s0;
+    curState <= s0;
   else if clk'event and clk = '1'then 
-    curState = nextState;
+    curState <= nextState;
 end if;    
 
 counter:process(counter_sig, clk)
