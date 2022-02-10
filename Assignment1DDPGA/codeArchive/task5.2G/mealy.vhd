@@ -68,7 +68,7 @@ BEGIN
       curState <= nextState;
     END IF;
   END PROCESS; -- seq
-  register: PROCESS(clk)
+ PROCESS(clk)
 	  BEGIN
 	    IF clk'event AND clk='1' THEN
 	      x_reg <= x;
