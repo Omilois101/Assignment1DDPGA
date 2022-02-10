@@ -1,67 +1,113 @@
 --------------------------------------------
---Implementation of a Pattern Detector
+-- Implementation of a Pattern Detector
+-- 
 --------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
-ENTITY pat_detector IS
+ENTITY recog2 IS
 PORT(
-  x: in STD_ULOGIC;
-  clk: in STD_ULOGIC;
-  reset: in STD_ULOGIC;
-  y: out STD_ULOGIC);
+      X: in	bit;
+      CLK: in	bit;
+      RESET: in	bit;
+      Y: out		bit);
 end;
 
-ARCHITECTURE arch_ pat_detector for pat_detector is 
-TYPE state_type IS (s0,s1,s2,s3)
-signal curState,nextState : std_Ulogic 
-signal counter_sig : integer; 
-signal en_counter,res_counter: bit;
-
-begin 
+ARCHITECTURE myArch of recog2 is 
+--------------------------------------------------------------------
+-- This architecture us assuming that there is no overlapping or 
+-- and there is a reseting of signal after the output has been asserted.
+-- meaning previous iput variables after output assertion will not be read. 
+---------------------------------------------------------------------------
+  TYPE state_type IS (resets,zero_state,one_state,out_state);
+  signal curState,nextState: state_type;
+  signal counter_sig : integer; 
+  signal en_counter,rest_counter: bit := '0';
+  Signal x_reg:STD_ULOGIC := '0';
+Begin 
   
-comb_nextstate: process()
+  comb_nextstate: process(curState,x_reg,counter_sig)
+  BEGIN
+      CASE curState IS
+         WHEN resets =>
+            if x_reg = '0' then
+              nextState <= zero_state;
+            else
+               nextState <= resets; 
+            end if;
+        
+         WHEN zero_state => 
+            if x_reg= '0' then 
+                nextState <= zero_state;
+                if counter_sig < 14 then 
+                    en_counter <= '1';
+                end if;
+            end if;
+            if x_reg= '1' then 
+                 if counter_sig = 14 then 
+                    nextState <= one_state;
+                  ELSE 
+                    nextState <= resets; 
+                    rest_counter <= '1';
+                  end if;
+            end if;
+      
+         WHEN one_state =>
+            if x_reg= '1' then 
+                nextState <= one_state;
+                if counter_sig < 16 then 
+                  en_counter <= '1';
+               end if;
+            end if;
+            if x_reg= '1' then 
+                if counter_sig = 16 then 
+                    nextState <= out_state;
+                ELSE 
+                    nextState <= resets; 
+                    rest_counter <= '1';
+                end if;
+            end if;
+      
+         WHEN out_state =>
+             nextState <= resets; 
+      end case;  
+  end process;
+
+  comb_out:process(curState)
+     begin 
+       y <= '0';  
+       IF curState = out_state THEN
+          y <= '1';
+       END IF;
+     end process;
+
+  SEQ_STATE: PROCESS (clk , reset)
    BEGIN
-    CASE curState IS
-      WHEN so => 
-        if x= '0' then 
-          nextState <+
-           
-      WHEN s1 =>
-        if 
-      WHEN s2 =>
-     
-      When s3 
-    end case;  
-end process;
+     if reset = '0' then 
+         curState <= resets;
+      elsif clk'event and clk = '1' then 
+         curState <= nextState;
+     END IF;    
+   END process;
 
-comb_out:process()
-    begin 
-      y <= '0';  
-    IF curState = 's3' THEN
-      y <= '1';
-    END IF;
-end process;
+   counter:process(reset,en_counter,rest_counter, clk)
+      begin
+         if reset = '0' or rest_counter = '1'then 
+           counter_sig <= 0; 
+          elsif clk'event and clk = '1' then 
+             if en_counter = '1' then
+                counter_sig <= counter_sig + 1;
+             end if;
+         end if;
+      end process; 
 
-SEQ_STATE: PROCESS (clk , curState)
-  if reset = '0' then 
-    curState <= s0;
-  else if clk'event and clk = '1'then 
-    curState <= nextState;
-end if;    
-
-counter:process(counter_sig, clk)
-begin
-  if reset = '0' or res_counter = '1'then 
-     counter_sig <= 0; 
- else if clk'event and clk = '1' then 
-     if en_counter = '1' then
-      counter_sig <= counter + 1;
-     end if;
- end if;
-end process; 
-
-END process; 
-END arch_ pat_detector;
+   registers: process(clk)
+	    BEGIN
+	      IF clk'event AND clk='1' THEN
+	        x_reg <= x;
+	      END IF;
+	    END PROCESS;
+ 
+END myArch;
 
