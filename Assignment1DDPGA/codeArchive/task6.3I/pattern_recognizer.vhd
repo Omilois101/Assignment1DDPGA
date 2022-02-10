@@ -24,7 +24,7 @@ ARCHITECTURE myArch of recog2 is
   signal curState,nextState: state_type;
   signal counter_sig : integer; 
   signal en_counter,rest_counter: bit := '0';
-  Signal x_reg:STD_ULOGIC := '0';
+  Signal x_reg: bit := '0';
 Begin 
   
   comb_nextstate: process(curState,x_reg,counter_sig)
@@ -60,11 +60,11 @@ Begin
                   en_counter <= '1';
                end if;
             end if;
-            if x_reg= '1' then 
+            if x_reg= '0' then 
                 if counter_sig = 16 then 
                     nextState <= out_state;
                 ELSE 
-                    nextState <= resets; 
+                    nextState <= zero_state; 
                     rest_counter <= '1';
                 end if;
             end if;
@@ -102,7 +102,7 @@ Begin
          end if;
       end process; 
 
-   registers: process(clk)
+    process(clk)
 	    BEGIN
 	      IF clk'event AND clk='1' THEN
 	        x_reg <= x;
