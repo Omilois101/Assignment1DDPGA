@@ -23,53 +23,53 @@ ARCHITECTURE myArch of recog2 is
   TYPE state_type IS (resets,zero_state,one_state,out_state);
   signal curState,nextState: state_type;
   signal zero_counter_sig,one_counter_sig : integer range 1 to 32 ; 
-  signal en_counter,rest_counter: bit := '0';
+  signal en_counter,en_one_counter,rest_counter,rest_one_counter: bit ;
   Signal x_reg: bit := '0';
 Begin 
   
   comb_nextstate: process(curState,x_reg,zero_counter_sig,one_counter_sig)
   BEGIN
+      en_counter <= '0';
+      en_one_counter <='0';
+      rest_counter <= '0';
+      rest_one_counter <='0';
       CASE curState IS
          WHEN resets =>
+            rest_counter <= '1';
+            rest_one_counter <='1';
             if x_reg = '0' then
               nextState <= zero_state;
             else
               nextState <= resets;
-              rest_counter <= '0';  
             end if;
         
          WHEN zero_state => 
-           if x_reg= '0' then 
-                if zero_counter_sig < 15 then 
-                  en_counter <= '1';
-                  nextState <= zero_state;  
+          if x_reg= '0' then 
+                nextState <= zero_state;
+                if zero_counter_sig < 16 then 
+                  en_counter <= '1';           
+                end if;
+          else  
+                if zero_counter_sig = 15 then  
+                nextState <= one_state;  
                 else
-                   nextState <= resets;
-                   rest_counter <= '1';                  
-                end if;
-           else 
-                 if zero_counter_sig = 15 then 
-                    nextState <= one_state;  
-                else 
-                   nextState <= resets;                                     
-                end if;
-           end if;
+                  nextState <= resets;              
+                end if;                                  
+          end if;
       
          WHEN one_state =>
             if x_reg= '1' then 
-                if one_counter_sig < 17 then 
-                  en_counter <= '1';
-                  nextState <= one_state; 
-                elsif one_counter_sig = 17 then
-                  nextState <= out_state; 
-                else 
-                  nextState <= resets;                       
+               nextState <= one_state;
+               if one_counter_sig < 18 then 
+                  en_one_counter <= '1';                                                
                end if;
-           else
-                   nextState <= resets;
-                   rest_counter <= '1';
-                
-          end if;
+            else
+              if one_counter_sig = 17 then
+                  nextState <= out_state; 
+              else
+                  nextState <= resets;  
+              end if;      
+            end if;
        
         WHEN out_state =>
              nextState <= resets; 
@@ -109,10 +109,10 @@ Begin
   
 	one_counter:process(reset,en_counter,rest_counter, clk)
       begin
-         if reset = '0' or rest_counter = '1'then 
+         if reset = '0' or rest_one_counter = '1'then 
           one_counter_sig <= 1; 
           elsif clk'event and clk = '1' then 
-             if en_counter = '1' then
+             if en_one_counter = '1' then
                one_counter_sig <= one_counter_sig + 1;
              else 
                one_counter_sig <= one_counter_sig;
