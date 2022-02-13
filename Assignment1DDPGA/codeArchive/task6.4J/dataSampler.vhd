@@ -89,7 +89,7 @@ BEGIN
     IF reset = '1' THEN
       reg3 <= TO_SIGNED(0,8);
     ELSIF clk'event AND clk='1' THEN
-      IF R3_en = true THEN--
+      IF R3_en = true THEN --
         reg3 <= reg3_in;
       END IF;
     END IF;
@@ -152,40 +152,54 @@ BEGIN
   
   nextStateLogic: PROCESS(curState)
   BEGIN
+    
     CASE curState IS
       WHEN STAGE0 =>
-        nextState <= 
-      WHEN 
-      ............
-      ............
-    -- Depending on the number of stages you have, and the minimum required 
-    -- number of bits, unused states may result.
-    -- If due to some noise or malfunction the FSM should end up in one of 
-    -- these undefined states, it may languish in that state for ever, 
-    -- until a system reset. Adding the following clause allows the circuit
-    -- to enter into a defined state in the next cycle.
+        if reg1 = reg1_in and reg2 = reg1_in then 
+          nextState => STAGE1;
+        else
+          nextState => STAGE0;  
+      end if; 
+      WHEN STAGE1 =>
+         if addOut = reg1 + reg2 then 
+            nexState => STAGE2;
+        else 
+            reset = '1';
+            nextState => STAGE0; 
+     WHEN STAGE3 =>
+       if reg3 = reg3_in and reg4 = addOut then 
+          nextState => STAGE1;
+     else
+          nextState
     WHEN OTHERS => 
       nextState <= STAGE0;
     END CASE;
-  END PROCESS;
+  END PROCESS;-- nextStateLogic
   
   ctrlOut: PROCESS(curState)
   BEGIN
     -- assign default values
-    R1_sel <= 
-    R2_sel <= 
-    ..................
-    R1_en <= false
-    R2_en <= false
-    ..................
+    M1_sel <= ;
+    M2_sel <= ;
+    M3_sel <= ;
+    
+    R1_en, R2_en, R3_en, R4_en, R5_en, R6_en := FALSE ;
+
     outValid <= '0';
     CASE curState IS
       
       WHEN STAGE0 =>
-      ..................
+        M1_sel = LEFT;
+        M2_sel = LEFT;
+      WHEN STAGE1 =>  
+        M1_sel = RIGHT;
+        M2_sel = RIGHT;
+        M3_sel = LEFT;
+      WHEN STAGE2 =>
+        M3_sel = RIGHT;
     END CASE;
-END PROCESS;
+END PROCESS;-- ctrlOut
   
-END; -- nextStateLogic
+END; 
       
       
