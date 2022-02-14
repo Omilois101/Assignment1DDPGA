@@ -24,7 +24,7 @@ END;
 
 ARCHITECTURE oneAdd_oneMult OF dataSampler IS
   TYPE MUXSEL is (LEFT, RIGHT);
-  TYPE STATE_TYPE is (STAGE0, STAGE1, STAGE2, STAGE3, STAGE4);
+  TYPE STATE_TYPE is (STAGE0, STAGE1, STAGE2, STAGE3);
   SIGNAL curState, nextState : STATE_TYPE;      
   -- control signals
   SIGNAL M1_sel, M2_sel, M3_sel : MUXSEL;
@@ -34,7 +34,7 @@ ARCHITECTURE oneAdd_oneMult OF dataSampler IS
   SIGNAL reg1, reg2, reg3, reg4, addOut: SIGNED(7 DOWNTO 0);
   SIGNAL reg5, reg6, multOut : SIGNED(15 DOWNTO 0);
 BEGIN
-  
+   
   M1: PROCESS(M1_sel,A_in,C_in)
   BEGIN
     IF M1_sel = LEFT THEN
@@ -155,51 +155,55 @@ BEGIN
     
     CASE curState IS
       WHEN STAGE0 =>
-        if reg1 = reg1_in and reg2 = reg1_in then 
-          nextState => STAGE1;
-        else
-          nextState => STAGE0;  
-      end if; 
+        nextState<=  STAGE1;
       WHEN STAGE1 =>
-         if addOut = reg1 + reg2 then 
-            nexState => STAGE2;
-        else 
-            reset = '1';
-            nextState => STAGE0; 
-     WHEN STAGE3 =>
-       if reg3 = reg3_in and reg4 = addOut then 
-          nextState => STAGE1;
-     else
-          nextState
-    WHEN OTHERS => 
-      nextState <= STAGE0;
+        nextState <=  STAGE2 ;
+      WHEN STAGE2 =>
+        nextState <=  STAGE3;
+      WHEN OTHERS => 
+        nextState <=  STAGE0;
     END CASE;
-  END PROCESS;-- nextStateLogic
+  END PROCESS;
+  
+
   
   ctrlOut: PROCESS(curState)
   BEGIN
     -- assign default values
-    M1_sel <= ;
-    M2_sel <= ;
-    M3_sel <= ;
-    
-    R1_en, R2_en, R3_en, R4_en, R5_en, R6_en := FALSE ;
-
+    M1_sel <= LEFT;
+    M2_sel <= LEFT;
+    M3_sel <= LEFT;
+    R1_en <= FALSE;
+    R2_en <= FALSE;
+    R3_en <= FALSE;
+    R4_en <= FALSE;
+    R5_en <= FALSE;
+    R6_en <= FALSE;
     outValid <= '0';
     CASE curState IS
-      
       WHEN STAGE0 =>
-        M1_sel = LEFT;
-        M2_sel = LEFT;
-      WHEN STAGE1 =>  
-        M1_sel = RIGHT;
-        M2_sel = RIGHT;
-        M3_sel = LEFT;
+        M1_sel<= LEFT;
+        M2_sel <=  LEFT;
+        R1_en <=  TRUE;
+        R2_en <=  TRUE;
+      WHEN STAGE1 =>
+        M3_sel <= LEFT; 
+        M1_sel <=  RIGHT; 
+        M2_sel <=  RIGHT;
+        R1_en <=  TRUE;
+        R2_en <=  TRUE; 
+        R3_en <=  TRUE; 
+        R4_en <=  TRUE; 
       WHEN STAGE2 =>
-        M3_sel = RIGHT;
+        M3_sel <= RIGHT;
+        R5_en <=  TRUE;
+        R3_en <=  TRUE;
+        WHEN STAGE3 =>
+        R6_en <=  TRUE;
+        outValid <= '1';
     END CASE;
-END PROCESS;-- ctrlOut
+END PROCESS;
   
-END; 
+END; -- nextStateLogic
       
       
