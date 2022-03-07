@@ -24,6 +24,7 @@ architecture behav of dataConsume is
   SIGNAL curState, nextState: state_type;
   Signal CtrlIn_Reg,CtrlIn_detected:std_logic; 
   Signal Bcd_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
+  Signal Max_index_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
   Signal Bcd_counter_en,Bcd_counter_reset: std_logic;
      
     next_state_logic: process(curState,start,Bcd_counter_signal,ctrlIn)
@@ -45,7 +46,8 @@ architecture behav of dataConsume is
              nextState <= second;   
           end if;  
         when second =>
-          -- The receive data state 
+          -- The receive data state from the dat generator
+          byte <= data; 
           nextState <= third;
         when third =>   
               if Bcd_counter_signal /= numWords then 
@@ -88,11 +90,15 @@ architecture behav of dataConsume is
       
     out_clk: process(curState,)
     begin
-  		   ctrlOut <= '0';
 		   dataReady <= '0';
 		   seqDone<= '0';
-		   maxIndex: out BCD_ARRAY_TYPE(2 downto 0);
-		   dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1);
+		   maxIndex <= (others => '0') ;
+		   dataResults <= (others => '0') ;
+		   if curState = fifth then 
+		     maxIndex <= Max_index_counter_signal; 
+		   else if curState = sixth then
+		     seqDone<= '1';
+		   end if; 
     end process;
 end behav; 
 
