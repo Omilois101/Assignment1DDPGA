@@ -3,8 +3,7 @@ USE ieee.std_logic_1164.ALL;
 use work.common_pack.all;
 
 entity dataConsume is
-	port (
-                 clk:  in std_logic;
+	port ( clk:  in std_logic;
 		reset: in std_logic; 
 		start: in std_logic; 
 		numWords_bcd: in BCD_ARRAY_TYPE(2 downto 0);
@@ -15,8 +14,7 @@ entity dataConsume is
 		byte: out std_logic_vector(7 downto 0);
 		seqDone: out std_logic;
 		maxIndex: out BCD_ARRAY_TYPE(2 downto 0);
-		dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1) -
-  	); 
+		dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1)); 
  end dataConsume;
  
 architecture behav of dataConsume is 
@@ -26,8 +24,9 @@ architecture behav of dataConsume is
   Signal Bcd_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
   Signal Max_index_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
   Signal Bcd_counter_en,Bcd_counter_reset: std_logic;
-     
+    begin
     next_state_logic: process(curState,start,Bcd_counter_signal,ctrlIn)
+    begin
       Case curState is 
         when init =>
           -- This is the initial state where the Comand Processor has its first contact with  the Data Processor
@@ -39,8 +38,8 @@ architecture behav of dataConsume is
             end if;   
         when first =>
           -- This state checks if there is a transition and the setting of a transition in the value of the ctrl signal. 
-          ctrlOut <= not ctrlOut; 
-          if Ctrl_delayed = '0' then 
+         ctrlOut <= not ctrlIn;
+          if CtrlIn_detected = '0' then 
              nextState <= first;
           else
              nextState <= second;   
@@ -50,14 +49,14 @@ architecture behav of dataConsume is
           byte <= data; 
           nextState <= third;
         when third =>   
-              if Bcd_counter_signal /= numWords then 
-                if start = '0' then
+              if Bcd_counter_signal = numWords_bcd then 
+                nextState <= fourth;
+              else
+               if start = '0' then
                   nextState <= second;
                 else
                   nextState <= first;
                 end if; 
-              else
-                nextState <= fourth;
               end if;
         when fourth =>
                nextState <= fifth;
@@ -73,9 +72,9 @@ architecture behav of dataConsume is
      if rising_edge(clk) then
       CtrlIn_Reg <= ctrlIn;
      end if;
-     CtrlIn_detected <= CtrlIn_Reg xor ctrlIn
+     CtrlIn_detected <= CtrlIn_Reg xor ctrlIn;
     else
-     CtrlIn_detected <= ctrlIn 
+     CtrlIn_detected <= ctrlIn; 
     end if;
     end process;
 
@@ -88,15 +87,15 @@ architecture behav of dataConsume is
        end if; 
       end process;
       
-    out_clk: process(curState,)
+    out_clk: process(curState)
     begin
 		   dataReady <= '0';
 		   seqDone<= '0';
-		   maxIndex <= (others => '0') ;
-		   dataResults <= (others => '0') ;
-		   if curState = fifth then 
+--		   maxIndex <= '0' ;
+		 --  dataResults <= '0' ;
+		   if curState = fourth then 
 		     maxIndex <= Max_index_counter_signal; 
-		   else if curState = sixth then
+		   elsif curState = fifth then
 		     seqDone<= '1';
 		   end if; 
     end process;
