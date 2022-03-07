@@ -22,14 +22,15 @@ entity dataConsume is
 architecture behav of dataConsume is 
   TYPE state_type IS (init,first,second,third,fourth,fifth); 
   SIGNAL curState, nextState: state_type;
-  Signal CtrlIn_reg, :std_logic; 
+  Signal CtrlIn_Reg,CtrlIn_delayed:std_logic; 
+  Signal Bcd_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
+  Signal Bcd_counter_en: std_logic;
      
-    next_state_logic: process(curState,start,count_sig*,ctrlIn)
-      ctrlOut := '';
+    next_state_logic: process(curState,start,Bcd_counter_signal,ctrlIn)
       Case curState is 
         when init =>
           -- This is the initial state where the Comand Processor has its first contact with  the Data Processor
-
+          -- The start signal lets the dataprocessor when to strat the transition.
             if start = '1' then
               nextState <= first;
             else 
@@ -37,15 +38,26 @@ architecture behav of dataConsume is
             end if;
             
         when first =>
-         if 
-      
-           
-           end if; 
+          -- This state checks if there is a transition and the 
+          ctrlOut <= not ctrlOut; 
+          if Ctrl_delayed = '0' then 
+             nextState <= first;
+          else
+             nextState <= second;   
+          end if; 
+          
         when second =>
+          nextState <= third;
         when third =>
-              if 
-              elsif 
+              
+              if Bcd_counter_signal /= numWords then 
+                if start = '0' then
+                  nextState <= second;
+                else
+                  nextState <= first;
+                end if; 
               else
+                nextState <= fourth;
               end if;
         when fourth =>
                nextState <= fifth;
@@ -55,12 +67,13 @@ architecture behav of dataConsume is
     
       end process;
 
-    two_phase_protocol:process(clk)
+   two_phase_protocol:process(clk)
     begin 
      if rising_edge(clk) then
-      ctrlIn_reg <= ctrlIn;
-    end if;
-   end process;
+      CtrlIn_Reg <= ctrlIn;
+     end if;
+     CtrlIn_delayed <= CtrlIn_Reg xor ctrlIn
+    end process;
 
     next_state_clk: process(clk,reset)
      begin 
@@ -72,10 +85,11 @@ architecture behav of dataConsume is
       end process;
       
     out_clk: process(curState,)
-  		ctrlOut <= '0';
-		dataReady <= '0';
-		seqDone<= '0';
-		maxIndex: out BCD_ARRAY_TYPE(2 downto 0);
-		dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1) -
-      end process;
+    begin
+  		   ctrlOut <= '0';
+		   dataReady <= '0';
+		   seqDone<= '0';
+		   maxIndex: out BCD_ARRAY_TYPE(2 downto 0);
+		   dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1);
+    end process;
 end behav; 
