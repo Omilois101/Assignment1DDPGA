@@ -22,12 +22,11 @@ entity dataConsume is
 architecture behav of dataConsume is 
   TYPE state_type IS (init,first,second,third,fourth,fifth); 
   SIGNAL curState, nextState: state_type;
-  Signal CtrlIn_Reg,CtrlIn_delayed:std_logic; 
+  Signal CtrlIn_Reg,CtrlIn_detected:std_logic; 
   Signal Bcd_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
   Signal Bcd_counter_en,Bcd_counter_reset: std_logic;
      
     next_state_logic: process(curState,start,Bcd_counter_signal,ctrlIn)
-      byte <="0000 0000";
       Case curState is 
         when init =>
           -- This is the initial state where the Comand Processor has its first contact with  the Data Processor
@@ -47,7 +46,6 @@ architecture behav of dataConsume is
           end if;  
         when second =>
           -- The receive data state 
-           
           nextState <= third;
         when third =>   
               if Bcd_counter_signal /= numWords then 
@@ -67,12 +65,16 @@ architecture behav of dataConsume is
     
       end process;
 
-   two_phase_protocol:process(clk)
+   two_phase_protocol:process(clk,curState)
     begin 
+    if curState = first then
      if rising_edge(clk) then
       CtrlIn_Reg <= ctrlIn;
      end if;
-     CtrlIn_delayed <= CtrlIn_Reg xor ctrlIn
+     CtrlIn_detected <= CtrlIn_Reg xor ctrlIn
+    else
+     CtrlIn_detected <= ctrlIn 
+    end if;
     end process;
 
     next_state_clk: process(clk,reset)
@@ -93,3 +95,4 @@ architecture behav of dataConsume is
 		   dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1);
     end process;
 end behav; 
+
