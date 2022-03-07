@@ -4,8 +4,8 @@ use work.common_pack.all;
 
 entity dataConsume is
 	port (
-    clk:		in std_logic;
-		reset:		in std_logic; 
+                 clk:  in std_logic;
+		reset: in std_logic; 
 		start: in std_logic; 
 		numWords_bcd: in BCD_ARRAY_TYPE(2 downto 0);
 		ctrlIn: in std_logic;
@@ -24,9 +24,10 @@ architecture behav of dataConsume is
   SIGNAL curState, nextState: state_type;
   Signal CtrlIn_Reg,CtrlIn_delayed:std_logic; 
   Signal Bcd_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
-  Signal Bcd_counter_en: std_logic;
+  Signal Bcd_counter_en,Bcd_counter_reset: std_logic;
      
     next_state_logic: process(curState,start,Bcd_counter_signal,ctrlIn)
+      byte <="0000 0000";
       Case curState is 
         when init =>
           -- This is the initial state where the Comand Processor has its first contact with  the Data Processor
@@ -35,21 +36,20 @@ architecture behav of dataConsume is
               nextState <= first;
             else 
               nextState <= init;
-            end if;
-            
+            end if;   
         when first =>
-          -- This state checks if there is a transition and the 
+          -- This state checks if there is a transition and the setting of a transition in the value of the ctrl signal. 
           ctrlOut <= not ctrlOut; 
           if Ctrl_delayed = '0' then 
              nextState <= first;
           else
              nextState <= second;   
-          end if; 
-          
+          end if;  
         when second =>
+          -- The receive data state 
+           
           nextState <= third;
-        when third =>
-              
+        when third =>   
               if Bcd_counter_signal /= numWords then 
                 if start = '0' then
                   nextState <= second;
