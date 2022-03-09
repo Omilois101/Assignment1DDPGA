@@ -18,7 +18,7 @@ entity dataConsume is
  end dataConsume;
  
 architecture behav of dataConsume is 
-  TYPE state_type IS (init,first,second,third,fourth,fifth); 
+  TYPE state_type IS (init,first,second,third,fourth,fifth,sixth); 
   SIGNAL curState, nextState: state_type;
   Signal CtrlIn_Reg,CtrlIn_detected:std_logic; 
   Signal Bcd_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
@@ -47,8 +47,11 @@ architecture behav of dataConsume is
         when second =>
           -- The receive data state from the dat generator
           byte <= data; 
-          nextState <= third;
-        when third =>   
+          nextState <= 4;
+	when third => 
+	    nextState <= fourth;
+	    Bcd_counter_en <= '0';
+        when fourth =>   
               if Bcd_counter_signal = numWords_bcd then 
                 nextState <= fourth;
               else
@@ -56,12 +59,12 @@ architecture behav of dataConsume is
                   nextState <= second;
                 else
                   nextState <= first;
-                end if; 
+                end if; e
               end if;
-        when fourth =>
-               nextState <= fifth;
         when fifth =>
-              nextState <= init;
+               nextState <= sixth;
+        when sixth =>
+              nextState <= init;	      
       end case;
     
       end process;
@@ -93,9 +96,9 @@ architecture behav of dataConsume is
 		   seqDone<= '0';
 --		   maxIndex <= '0' ;
 		 --  dataResults <= '0' ;
-		   if curState = fourth then 
+		   if curState = fifth then 
 		     maxIndex <= Max_index_counter_signal; 
-		   elsif curState = fifth then
+		   elsif curState = sixth then
 		     seqDone<= '1';
 		   end if; 
     end process;
