@@ -42,7 +42,7 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
   SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-  SIGNAL peakDetected: std_logic :='0';
+  SIGNAL peakDetected: std_logic;
   SIGNAL dataThreshold: std_logic_vector(7 downto 0) := ("00000000");
   SIGNAL CtrlIn_Reg: std_logic;
   SIGNAL grtthan,equals: std_logic; 
@@ -180,8 +180,7 @@ BEGIN
           -- The receive data state from the dat generator 
           nextState <= third;
           
-       	when third =>
-         		    nextState <= fourth; 
+   	when third =>
               if bcd_counter = numWords_bcd then 
                 nextState <= fourth;
               else
@@ -194,7 +193,7 @@ BEGIN
               
         when fourth =>
                nextState <= fifth;
-               
+                         
         when fifth =>
               nextState <= init;	      
       end case;
@@ -218,9 +217,9 @@ BEGIN
          else 
            dataThreshold <=  dataThreshold;  
            max_index_sig <= max_index_sig; 
-           peakdetected <= '0';
          end if;
        elsif  curState = third then
+           shifter_en <= '0';
            bcd_counter_en <= '0';
 		   elsif curState = fourth then 
 		     dataResults <= array2;
